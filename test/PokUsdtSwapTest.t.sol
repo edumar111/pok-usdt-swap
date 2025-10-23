@@ -53,10 +53,11 @@ contract PokUsdtPokUsdtSwapTest  is Test {
         // Fondear contrato con reservas
         pok.mint(address(swap), 1_000_000 * 1e6);
         usdt.mint(address(swap), 1_000_000 * 1e6);
-
+ 
         // Fondos de Alice
         usdt.mint(alice, 10_000 * 1e6);
         pok.mint(alice, 5_000 * 1e6);
+        
     }
  /*
     function testInitialBalances() public {
@@ -70,73 +71,84 @@ contract PokUsdtPokUsdtSwapTest  is Test {
     
    //test case setFee
    function testShouldRevertSetFeeWhenNotOwner() public {
-        vm.prank(alice);
+        vm.startPrank(alice);
         vm.expectRevert();
         swap.setFee(100, alice); // intentar setear fee como Alice (no owner)
+        vm.stopPrank();
     }
    function testShouldFailSetFeeWithInvalidFee() public {
-        vm.prank(owner);
+        vm.startPrank(owner);
         vm.expectRevert(PokUsdtSwap.InvalidFee.selector);
         swap.setFee(10_001, owner); // más de 100%
+        vm.stopPrank();
     }
 
     function testShouldFailSetFeeWithZeroAddress() public {
-        vm.prank(owner);
+        vm.startPrank(owner);
         vm.expectRevert(PokUsdtSwap.ZeroAddress.selector);
         swap.setFee(100, address(0)); // dirección cero
+        vm.stopPrank();
     }
    function testShouldSetFee() public {
-        vm.prank(owner);
+        vm.startPrank(owner);
         swap.setFee(200, owner); // 2%
         (uint16 feeBps, address feeReceiver) = (swap.feeBps(), swap.feeReceiver());
         assertEq(feeBps, 200, "Fee Bps incorrecto");
         assertEq(feeReceiver, owner, "Fee receiver incorrecto");
+        vm.stopPrank();
     }
     // test case pause/unpause
    function testShouldRevertBuyPokWhenAlreadyPaused() public {
-        vm.prank(owner);
+        vm.startPrank(owner);
         swap.pause();
-        vm.prank(owner);
+       
         vm.expectRevert();
         swap.buyPok(1_000 * 1e6, alice);
+        vm.stopPrank();
     }
     function testShouldRevertPauseWhenNotOwner() public {
-        vm.prank(alice);
+        vm.startPrank(alice);
         vm.expectRevert();
         swap.pause(); // intentar pausar como Alice (no owner)
+        vm.stopPrank();
     }
     function testShouldPause() public {
-        vm.prank(owner);
+        vm.startPrank(owner);
         swap.pause();
         assertTrue(swap.paused(), unicode"El contrato debería estar pausado");
+        vm.stopPrank();
            
     }
      function testShouldRevertUnpauseWhenNotOwner() public {
-        vm.prank(alice);
+        vm.startPrank(alice);
         vm.expectRevert();
         swap.unpause(); // intentar reanudar como Alice (no owner)
+        vm.stopPrank();
     }
      function testShouldUnpause() public {
-        vm.prank(owner);
+        vm.startPrank(owner);
         swap.pause();
         assertTrue(swap.paused(), unicode"El contrato debería estar pausado");     
-        vm.prank(owner);
+        
         swap.unpause();
         assertFalse(swap.paused(), unicode"El contrato debería estar activo");     
+        vm.stopPrank();
     }
 
     //test case rescue
     function testShouldRevertRescueWhenNotOwner() public {
-        vm.prank(alice);
+        vm.startPrank(alice);
         vm.expectRevert();
         swap.rescue(address(usdt), 1_000 * 1e6, alice); // intentar rescatar como Alice (no owner)
+        vm.stopPrank();
     }
     function testRescue() public {
         uint256 usdtBefore = usdt.balanceOf(owner);
-        vm.prank(owner);
+        vm.startPrank(owner);
         swap.rescue(address(usdt), 1_000 * 1e6, owner);
         uint256 usdtAfter = usdt.balanceOf(owner);
         assertEq(usdtAfter - usdtBefore, 1_000 * 1e6, "USDT rescatados incorrectos");
+        vm.stopPrank();
     }
 
     // Test case buyPok 
@@ -191,6 +203,35 @@ contract PokUsdtPokUsdtSwapTest  is Test {
         pok.approve(address(swap), 0);
         vm.expectRevert(PokUsdtSwap.ZeroAmount.selector);
         swap.sellPok(0, alice);
+        vm.stopPrank();
+    }
+    function testshouldFailSellWithZeroAddress() public {
+        vm.startPrank(alice);
+        pok.approve(address(swap), 1_000 * 1e6);
+        vm.expectRevert(PokUsdtSwap.ZeroAddress.selector);
+        swap.sellPok(1_000 * 1e6, address(0));
+        vm.stopPrank();
+    }
+    
+    function testshouldFailSellWithInsufficientPokFunds() public {
+        vm.startPrank(alice);
+        uint256 balanceAliceBefore =  pok.balanceOf(address(alice));
+        console.log("Balance de Alice en pok antes de la approve:", balanceAliceBefore / 1e6);
+        pok.approve(address(swap), 8_000 * 1e6);   
+        vm.expectRevert("Fondos POK insuficientes");
+        swap.sellPok(8_000 * 1e6, alice);
+        vm.stopPrank();
+    }
+
+     function testshouldFailSellWithInsufficientFundsUsdtInContract() public {
+        // Fondear contrato con pocas reservas
+        vm.startPrank(alice);
+        pok.mint(alice, 1_010_000 * 1e6);   
+        pok.approve(address(swap), 1_010_000 * 1e6);
+
+        vm.expectRevert(PokUsdtSwap.InsufficientLiquidity.selector);
+        swap.sellPok(1_010_000 * 1e6, alice); //
+
         vm.stopPrank();
     }
 

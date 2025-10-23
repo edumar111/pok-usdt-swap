@@ -83,6 +83,8 @@ contract PokUsdtSwap is Ownable2Step, ReentrancyGuard, Pausable {
     function sellPok(uint256 pokAmount, address to) external nonReentrant whenNotPaused {
         if (pokAmount == 0) revert ZeroAmount();
         if (to == address(0)) revert ZeroAddress();
+        
+        require(POK_TOKEN.balanceOf(address(msg.sender) ) >= pokAmount, "Fondos POK insuficientes");
 
         POK_TOKEN.safeTransferFrom(msg.sender, address(this), pokAmount);
 
