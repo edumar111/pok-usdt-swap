@@ -49,6 +49,11 @@ $ anvil
 
 ```shell
 $ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+
+forge script script/DeployPok.s.sol   --broadcast --verify
+forge script script/DeployUsdt.s.sol   --broadcast --verify
+
+forge script script/DeploySwap.s.sol   --broadcast --verify
 ```
 
 ### Cast
@@ -64,3 +69,7 @@ $ forge --help
 $ anvil --help
 $ cast --help
 ```
+
+POK Contract Address: 0x647c3888f9251Ad075e0b2419Af69c79f47896E8
+USDT Contract Address: 0x7626d6883754a3b6870eED9D33BA4a2F2d36dE44
+SWAP Contract Address: 0x06D7d7833708bF82cc6c7a05cA38e9bDceCb4224

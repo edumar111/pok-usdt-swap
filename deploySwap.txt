@@ -1,0 +1,46 @@
+Script ran successfully.
+Gas used: 1622627
+
+## Setting up 1 EVM.
+
+==========================
+
+Chain 11155111
+
+Estimated gas price: 0.001000016 gwei
+
+Estimated total gas used for script: 2291950
+
+Estimated amount required: 0.0000022919866712 ETH
+
+==========================
+
+##### sepolia
+✅  [Success] Hash: 0x03f84d0b56fa4b2a391948001104ad131ebb6a5cd41094419bf90b590f6b8b46
+Block: 9484492
+Paid: 0.000000028791230328 ETH (28791 gas * 0.001000008 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0xa631e5a2d9b1299b497a3e40b8a3de437b5ca281446e357117d37cdec772d162
+Contract Address: 0x06D7d7833708bF82cc6c7a05cA38e9bDceCb4224
+Block: 9484492
+Paid: 0.000001732462859592 ETH (1732449 gas * 0.001000008 gwei)
+
+✅ Sequence #1 on sepolia | Total Paid: 0.00000176125408992 ETH (1761240 gas * avg 0.001000008 gwei)
+
+
+==========================
+
+ONCHAIN EXECUTION COMPLETE & SUCCESSFUL.
+##
+Start verification for (1) contracts
+Start verifying contract `0x06D7d7833708bF82cc6c7a05cA38e9bDceCb4224` deployed on sepolia
+EVM version: prague
+Compiler version: 0.8.30
+Constructor args: 0000000000000000000000007626d6883754a3b6870eed9d33ba4a2f2d36de44000000000000000000000000647c3888f9251ad075e0b2419af69c79f47896e8000000000000000000000000f7c8844af922e15b2867680747905bd009ec918a
+Attempting to verify on Sourcify. Pass the --etherscan-api-key <API_KEY> to verify on Etherscan, or use the --verifier flag to verify on another provider.
+
+Submitting verification for [PokUsdtSwap] "0x06D7d7833708bF82cc6c7a05cA38e9bDceCb4224".
+Contract successfully verified
+All (1) contracts were verified!

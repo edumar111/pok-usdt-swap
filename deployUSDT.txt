@@ -1,0 +1,40 @@
+Script ran successfully.
+Gas used: 1159503
+
+## Setting up 1 EVM.
+
+==========================
+
+Chain 11155111
+
+Estimated gas price: 0.001000016 gwei
+
+Estimated total gas used for script: 1644500
+
+Estimated amount required: 0.000001644526312 ETH
+
+==========================
+
+##### sepolia
+✅  [Success] Hash: 0x78648eecbe3d46d3ab55fd882dec09b30ba2f718154007b4a26bf840433931f7
+Contract Address: 0x7626d6883754a3b6870eED9D33BA4a2F2d36dE44
+Block: 9484431
+Paid: 0.00000126501012 ETH (1265000 gas * 0.001000008 gwei)
+
+✅ Sequence #1 on sepolia | Total Paid: 0.00000126501012 ETH (1265000 gas * avg 0.001000008 gwei)
+
+
+==========================
+
+ONCHAIN EXECUTION COMPLETE & SUCCESSFUL.
+##
+Start verification for (1) contracts
+Start verifying contract `0x7626d6883754a3b6870eED9D33BA4a2F2d36dE44` deployed on sepolia
+EVM version: prague
+Compiler version: 0.8.30
+Constructor args: 00000000000000000000000000000000000000000000000000038d7ea4c68000000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000000b546574686572205553445000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000055553445450000000000000000000000000000000000000000000000000000000
+Attempting to verify on Sourcify. Pass the --etherscan-api-key <API_KEY> to verify on Etherscan, or use the --verifier flag to verify on another provider.
+
+Submitting verification for [SwapToken] "0x7626d6883754a3b6870eED9D33BA4a2F2d36dE44".
+Contract successfully verified
+All (1) contracts were verified!
