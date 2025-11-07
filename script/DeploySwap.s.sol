@@ -2,7 +2,7 @@
 pragma solidity ^0.8.26;
 
 
-import {Script} from "forge-std/Script.sol";
+import {Script,console} from "forge-std/Script.sol";
 
 import {PokUsdtSwap} from "../src/PokUsdtSwap.sol";
 
@@ -19,6 +19,7 @@ contract DeploySwap is Script {
         
         PokUsdtSwap swap = new PokUsdtSwap(usdt, pok, owner);
         swap.setFee(0, owner);
+        console.log("Swap contract Address:", address(swap));
         vm.stopBroadcast();
     }
 }

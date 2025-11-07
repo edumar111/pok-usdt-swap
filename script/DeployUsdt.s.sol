@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.24;
 
-import {Script} from "forge-std/Script.sol";
+import {Script,console} from "forge-std/Script.sol";
 import {SwapToken} from "../src/SwapToken.sol"; 
 contract DeployUsdt is Script {
     function run() external {
@@ -17,5 +17,6 @@ contract DeployUsdt is Script {
        
         SwapToken usdt = new SwapToken(initialSupply, name, symbol);
         vm.stopBroadcast();
+        console.log("USDT contract Address:", address(usdt));
     }
 }

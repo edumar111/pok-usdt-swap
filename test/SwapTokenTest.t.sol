@@ -25,20 +25,20 @@ contract SwapTokenTest is Test {
         swapToken = new SwapToken(initialSupply, name, symbol);
     }
 
-    function testInitialSupply() public {
+    function testInitialSupply() public view {
         uint256 totalSupply_ = swapToken.totalSupply();
         assertEq(totalSupply_, initialSupply);
     }
-    function testName() public  {
+    function testName() public view {
         string memory name_ = swapToken.name();
         assertEq(name_, name);
     }
-    function testSymbol() public  {
+    function testSymbol() public view {
         string memory symbol_ = swapToken.symbol();
         assertEq(symbol_, symbol);      
     }
 
-    function testDecimals() public  {
+    function testDecimals() public view {
         uint8 decimals_ = swapToken.decimals();
         assertEq(decimals_, 6);      
     }   

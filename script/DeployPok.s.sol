@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.24;
 
-import {Script} from "forge-std/Script.sol";
+import {Script,console} from "forge-std/Script.sol";
 import {SwapToken} from "../src/SwapToken.sol";
 contract DeployPok is Script {
     function run() external {
@@ -20,5 +20,6 @@ contract DeployPok is Script {
        
         SwapToken pok = new SwapToken(initialSupply, name, symbol);
         vm.stopBroadcast();
+        console.log("POK contract Address:", address(pok));
     }
 }

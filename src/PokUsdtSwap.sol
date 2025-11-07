@@ -81,7 +81,7 @@ contract PokUsdtSwap is Ownable2Step, ReentrancyGuard, Pausable {
         if (usdtAmount == 0) revert ZeroAmount();
         if (to == address(0)) revert ZeroAddress();
         // validate that the msg.sender has enough USDT balance
-        require(USDT_TOKEN.balanceOf(address(msg.sender) ) >= usdtAmount, "Fondos USDT insuficientes");
+        require(USDT_TOKEN.balanceOf(address(msg.sender) ) >= usdtAmount, "Not enough USDT balance");
 
         USDT_TOKEN.safeTransferFrom(msg.sender, address(this), usdtAmount);
 
@@ -103,8 +103,8 @@ contract PokUsdtSwap is Ownable2Step, ReentrancyGuard, Pausable {
     function sellPok(uint256 pokAmount, address to) external nonReentrant whenNotPaused {
         if (pokAmount == 0) revert ZeroAmount();
         if (to == address(0)) revert ZeroAddress();
-        
-        require(POK_TOKEN.balanceOf(address(msg.sender) ) >= pokAmount, "Fondos POK insuficientes");
+
+        require(POK_TOKEN.balanceOf(address(msg.sender) ) >= pokAmount, "Not enough POK balance");
 
         POK_TOKEN.safeTransferFrom(msg.sender, address(this), pokAmount);
 
